@@ -1,19 +1,14 @@
 package github.com.agatagolonka.amazontest;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeTest;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class DeletingItemFromCart {
@@ -23,7 +18,7 @@ public class DeletingItemFromCart {
     WebDriver driver;
 
     @BeforeEach
-    void startPage(){
+    void startPage() {
         System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -39,7 +34,7 @@ public class DeletingItemFromCart {
         WebElement item = driver.findElement(By.xpath("//span[text()=\"Witcher 3: Wild Hunt Complete Edition - PlayStation 4 Complete Edition\"]"));
         item.click();
 
-        WebElement addToCart= driver.findElement(By.id("add-to-cart-button"));
+        WebElement addToCart = driver.findElement(By.id("add-to-cart-button"));
         addToCart.click();
 
 
@@ -49,17 +44,16 @@ public class DeletingItemFromCart {
     @Test
     public void testDeletingItemFromCart() {
         driver.get("https://www.amazon.com/gp/cart/view.html/ref=lh_cart");
-        driver.manage().timeouts().implicitlyWait(4 , TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
         WebElement element = driver.findElement(By.cssSelector("input[value='Delete']"));
-         element.click();
+        element.click();
 
         String strCart = driver.findElement(By.xpath("html/body/div[1]/div[4]/div[1]/div[2]/div[2]/div/div[2]/div[4]/div/div/div[2]/div[1]/h2")).getText();
-        Assert.assertEquals(strCart,CART_EMPTY);
+        Assert.assertEquals(strCart, CART_EMPTY);
     }
 
 
-
-        @AfterClass
+    @AfterClass
     public void quitBrowser() {
 
         driver.quit();

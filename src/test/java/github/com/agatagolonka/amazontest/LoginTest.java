@@ -17,7 +17,7 @@ class LoginTest {
     WebDriver driver;
 
     @BeforeEach
-    void startPage(){
+    void startPage() {
         System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
         driver = new ChromeDriver();
         driver.manage().window().maximize();

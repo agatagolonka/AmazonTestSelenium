@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.asserts.SoftAssert;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +19,7 @@ class Search {
     WebDriver driver;
 
     @BeforeEach
-    void startPage(){
+    void startPage() {
         System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -33,7 +32,7 @@ class Search {
         element = driver.findElement(By.xpath("html/body/div[1]/header/div/div[1]/div[2]/div/form/div[2]/div[1]/input"));
         element.sendKeys("Witcher 3");
         element.findElement(By.xpath("//input[@id=\"nav-search-submit-button\"]")).click();
-        driver.manage().timeouts().implicitlyWait(5 , TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         String str = driver.findElement(By.xpath("//span[text()=\"Witcher 3: Wild Hunt Complete Edition - PlayStation 4 Complete Edition\"]")).getText();
         Assert.assertTrue(str.contains("Witcher"));
 
